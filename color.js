@@ -1,64 +1,56 @@
+const startButton = document.getElementById('startButton');
 const roulette = document.getElementById('roulette');
 const pointer = document.getElementById('pointer');
-const startButton = document.getElementById('start-button');
 const message = document.getElementById('message');
-const video = document.getElementById('color-video');
+const video = document.getElementById('colorVideo');
 
-const segments = [
-  { color: 'red', angle: 0, bg: '#ff4d4d', video: 'red.mov', message: '今日のラッキーカラーは赤！' },
-  { color: 'orange', angle: 36, bg: '#ffa500', video: 'orange.mov', message: '今日のラッキーカラーはオレンジ！' },
-  { color: 'yellow', angle: 72, bg: '#ffff66', video: 'yellow.mov', message: '今日のラッキーカラーは黄色！' },
-  { color: 'green', angle: 108, bg: '#66ff66', video: 'green.mov', message: '今日のラッキーカラーは緑！' },
-  { color: 'blue', angle: 144, bg: '#66b3ff', video: 'blue.mov', message: '今日のラッキーカラーは青！' },
-  { color: 'purple', angle: 180, bg: '#cc66ff', video: 'purple.mov', message: '今日のラッキーカラーは紫！' },
-  { color: 'pink', angle: 216, bg: '#ff99cc', video: 'pink.mov', message: '今日のラッキーカラーはピンク！' },
-  { color: 'brown', angle: 252, bg: '#cc9966', video: 'brown.mov', message: '今日のラッキーカラーは茶色！' },
-  { color: 'black', angle: 288, bg: '#333333', video: 'black.mov', message: '今日のラッキーカラーは黒！' },
-  { color: '?', angle: 324, bg: '#ffffff', video: 'question.mov', message: '今日は何が起こるかお楽しみに！' }
+const colors = [
+  { color: '#ff0000', name: '赤', video: 'red.mov', message: '情熱の赤！' },
+  { color: '#ffa500', name: 'オレンジ', video: 'orange.mov', message: '元気いっぱいオレンジ！' },
+  { color: '#ffff00', name: '黄色', video: 'yellow.mov', message: '幸せの黄色！' },
+  { color: '#008000', name: '緑', video: 'green.mov', message: '癒しの緑！' },
+  { color: '#00ffff', name: '水色', video: 'cyan.mov', message: '爽やかな水色！' },
+  { color: '#0000ff', name: '青', video: 'blue.mov', message: '冷静な青！' },
+  { color: '#800080', name: '紫', video: 'purple.mov', message: 'ミステリアスな紫！' },
+  { color: '#ffc0cb', name: 'ピンク', video: 'pink.mov', message: 'ラブリーなピンク！' },
+  { color: '#000000', name: '黒', video: 'black.mov', message: 'クールな黒！' },
+  { color: '#ffffff', name: '?', video: 'question.mov', message: '超ラッキー！何かが起きる！？' }
 ];
 
 let spinning = false;
-let currentRotation = 0;
 
 startButton.addEventListener('click', () => {
   if (spinning) return;
+
   spinning = true;
-
-  // 初期化
-  roulette.style.display = 'block';
-  pointer.style.display = 'block';
-  video.pause();
-  video.currentTime = 0;
-  video.style.display = 'none';
   startButton.style.display = 'none';
+  pointer.style.display = 'none';
   message.textContent = '';
-  document.body.style.backgroundColor = '#f0f0f0';
+  video.style.display = 'none';
+  video.pause();
+  video.src = '';
 
-  // 色をランダム選択
-  const result = segments[Math.floor(Math.random() * segments.length)];
-  const fullRotations = 5 * 360;
-  const totalRotation = fullRotations + (360 - result.angle);
+  const rounds = 5; // 最低回転数
+  const selected = Math.floor(Math.random() * colors.length);
+  const degreesPerSlice = 360 / colors.length;
+  const endDeg = 360 * rounds + (360 - selected * degreesPerSlice) - degreesPerSlice / 2;
 
-  currentRotation += totalRotation;
-  roulette.style.transition = 'transform 3s ease-out';
-  roulette.style.transform = `rotate(${currentRotation}deg)`;
+  roulette.style.transition = 'transform 5s ease-out';
+  roulette.style.transform = `rotate(${endDeg}deg)`;
 
   setTimeout(() => {
-    document.body.style.backgroundColor = result.bg;
+    const result = colors[selected];
+    document.body.style.backgroundColor = result.color;
     message.textContent = result.message;
-
-    roulette.style.display = 'none';
-    pointer.style.display = 'none';
-
     video.src = result.video;
     video.style.display = 'block';
     video.play();
 
-    // 動画再生終了後にボタン復活
+    // イベント終了後に初期化
     video.onended = () => {
       startButton.style.display = 'inline-block';
+      pointer.style.display = 'block';
+      spinning = false;
     };
-
-    spinning = false;
-  }, 3000);
+  }, 5200); // アニメーション終了後
 });

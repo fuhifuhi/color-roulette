@@ -3,19 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ラッキーカラールーレット</title>
+  <title>カラールーレット</title>
   <link rel="stylesheet" href="color.css">
 </head>
 <body>
-  <div id="app">
-    <h1 id="title">ラッキーカラールーレット</h1>
-    <div id="roulette-container">
-      <img id="roulette" src="roulette.png" alt="ルーレット">
-      <img id="pointer" src="pointer.png" alt="ポインター">
+  <div class="container">
+    <div class="roulette-wrapper">
+      <img src="roulette.png" alt="ルーレット" id="roulette" />
+      <img src="pointer.png" alt="ポインター" class="pointer" id="pointer" />
     </div>
-    <button id="start-button">スタート</button>
-    <p id="message"></p>
-    <video id="color-video" playsinline muted></video>
+    <button id="startButton">スタート</button>
+    <div id="message"></div>
+    <video id="colorVideo" playsinline></video>
   </div>
   <script src="color.js"></script>
 </body>
