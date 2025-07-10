@@ -26,13 +26,12 @@ h1 {
 #roulette {
   width: 100%;
   height: auto;
-  transition: transform 3s ease-out;
-  transform-origin: center center;
+  transform-origin: 50% 50%;
 }
 
 #pointer {
   position: absolute;
-  top: 10%;
+  top: 4%;
   left: 50%;
   width: 20%;
   transform: translate(-50%, 0);

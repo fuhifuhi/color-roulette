@@ -12,11 +12,18 @@ document.getElementById('startBtn').addEventListener('click', function () {
   video.src = '';
   resultMessage.style.display = 'none';
 
+  // 回転アニメーションをつける（強制再描画）
+  roulette.style.transition = 'none';
+  roulette.style.transform = 'rotate(0deg)';
+  void roulette.offsetWidth; // ←これが大事！
+
   const extraRotation = Math.floor(Math.random() * 360);
   const totalRotation = 360 * 5 + extraRotation;
 
-  roulette.style.transition = 'transform 3s ease-out';
-  roulette.style.transform = `rotate(${totalRotation}deg)`;
+  setTimeout(() => {
+    roulette.style.transition = 'transform 3s ease-out';
+    roulette.style.transform = `rotate(${totalRotation}deg)`;
+  }, 10);
 
   const finalAngle = (360 - (totalRotation % 360)) % 360;
   const index = Math.floor(finalAngle / anglePerSegment);
