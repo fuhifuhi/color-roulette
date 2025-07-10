@@ -30,10 +30,11 @@ startButton.addEventListener('click', () => {
   video.pause();
   video.src = '';
 
-  const rounds = 5; // 最低回転数
-  const selected = Math.floor(Math.random() * colors.length);
-  const degreesPerSlice = 360 / colors.length;
-  const endDeg = 360 * rounds + (360 - selected * degreesPerSlice) - degreesPerSlice / 2;
+  const totalSlices = colors.length;
+  const selected = Math.floor(Math.random() * totalSlices);
+  const degreesPerSlice = 360 / totalSlices;
+  const offset = degreesPerSlice / 2;
+  const endDeg = 360 * 5 + (360 - selected * degreesPerSlice - offset);
 
   roulette.style.transition = 'transform 5s ease-out';
   roulette.style.transform = `rotate(${endDeg}deg)`;
@@ -46,11 +47,10 @@ startButton.addEventListener('click', () => {
     video.style.display = 'block';
     video.play();
 
-    // イベント終了後に初期化
     video.onended = () => {
       startButton.style.display = 'inline-block';
       pointer.style.display = 'block';
       spinning = false;
     };
-  }, 5200); // アニメーション終了後
+  }, 5200);
 });

@@ -3,61 +3,71 @@ body {
   padding: 0;
   background-color: #ffffff;
   font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 .container {
   text-align: center;
-  max-width: 100%;
   width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .roulette-wrapper {
   position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
 }
 
 #roulette {
   width: 100%;
   height: auto;
   transition: transform 5s ease-out;
+  display: block;
 }
 
 .pointer {
   position: absolute;
   top: -20px;
   left: 50%;
+  transform: translateX(-50%);
   width: 40px;
   height: 40px;
-  transform: translateX(-50%);
   z-index: 2;
 }
 
 #startButton {
   margin-top: 20px;
-  padding: 10px 30px;
+  padding: 12px 36px;
   font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: #fff;
   cursor: pointer;
   z-index: 3;
+  position: relative;
 }
 
 #message {
-  margin-top: 20px;
-  font-size: 20px;
+  margin-top: 16px;
+  font-size: 18px;
   font-weight: bold;
+  text-align: center;
 }
 
 #colorVideo {
   margin-top: 20px;
-  max-width: 80%;
+  max-width: 100%;
   height: auto;
   display: none;
 }
