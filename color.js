@@ -1,5 +1,8 @@
-document.getElementById('startBtn').addEventListener('click', function() {
-  const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'black', 'white'];
+document.getElementById('startBtn').addEventListener('click', function () {
+  const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'black', 'white']; // 色の並びをルーレット画像に正確に合わせる
+  const segments = colors.length;
+  const anglePerSegment = 360 / segments;
+
   const roulette = document.getElementById('roulette');
   const video = document.getElementById('colorVideo');
 
@@ -8,19 +11,23 @@ document.getElementById('startBtn').addEventListener('click', function() {
   video.style.display = 'none';
   video.src = '';
 
-  // ランダムな角度で回転（5回転＋0〜360度）
-  const randomAngle = 360 * 5 + Math.floor(Math.random() * 360);
-  roulette.style.transition = 'transform 3s ease-out';
-  roulette.style.transform = `rotate(${randomAngle}deg)`;
+  // 回転角をランダムに決定（5回転以上 + 0〜359度）
+  const extraRotation = Math.floor(Math.random() * 360);
+  const totalRotation = 360 * 5 + extraRotation;
 
-  // 色のインデックスを取得
-  const index = Math.floor((randomAngle % 360) / (360 / colors.length));
+  // ルーレット画像を回転
+  roulette.style.transition = 'transform 3s ease-out';
+  roulette.style.transform = `rotate(${totalRotation}deg)`;
+
+  // 最終停止角度からインデックスを算出（時計回りなので360から引く）
+  const finalAngle = (360 - (totalRotation % 360)) % 360;
+  const index = Math.floor(finalAngle / anglePerSegment);
   const selectedColor = colors[index];
 
-  // ルーレット停止後に動画再生
+  // 指定色の .mov を表示・再生
   setTimeout(() => {
     video.src = `${selectedColor}.mov`;
     video.style.display = 'block';
     video.play();
-  }, 3000); // 3秒後に再生
+  }, 3000);
 });
