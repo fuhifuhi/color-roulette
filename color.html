@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カラールーレット</title>
+  <link rel="stylesheet" href="color.css">
+</head>
+<body>
+  <div class="container">
+    <div class="roulette-wrapper">
+      <img src="img/roulette.png" alt="ルーレット" id="roulette">
+      <img src="img/pointer.png" alt="ポインター" id="pointer">
+    </div>
+    <div class="buttons">
+      <button id="startBtn">まわす</button>
+      <button id="stopBtn" disabled>とめる</button>
+    </div>
+    <div id="result">
+      <video id="result-video" src="" controls autoplay playsinline></video>
+      <p id="result-text"></p>
+    </div>
+  </div>
+  <script src="color.js"></script>
+</body>
+</html>
