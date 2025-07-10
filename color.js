@@ -24,16 +24,17 @@ startButton.addEventListener('click', () => {
   if (spinning) return;
   spinning = true;
 
-  // 初期化処理
+  // 初期化
   roulette.style.display = 'block';
   pointer.style.display = 'block';
   video.pause();
   video.currentTime = 0;
   video.style.display = 'none';
+  startButton.style.display = 'none';
   message.textContent = '';
   document.body.style.backgroundColor = '#f0f0f0';
 
-  // ランダム選択
+  // 色をランダム選択
   const result = segments[Math.floor(Math.random() * segments.length)];
   const fullRotations = 5 * 360;
   const totalRotation = fullRotations + (360 - result.angle);
@@ -52,6 +53,11 @@ startButton.addEventListener('click', () => {
     video.src = result.video;
     video.style.display = 'block';
     video.play();
+
+    // 動画再生終了後にボタン復活
+    video.onended = () => {
+      startButton.style.display = 'inline-block';
+    };
 
     spinning = false;
   }, 3000);
