@@ -24,27 +24,25 @@ startButton.addEventListener('click', () => {
   if (spinning) return;
   spinning = true;
 
-  // 初期化
+  // 初期化処理
   roulette.style.display = 'block';
+  pointer.style.display = 'block';
   video.pause();
   video.currentTime = 0;
   video.style.display = 'none';
-  pointer.style.display = 'block';
   message.textContent = '';
   document.body.style.backgroundColor = '#f0f0f0';
 
-  // ランダムにセグメントを選ぶ
+  // ランダム選択
   const result = segments[Math.floor(Math.random() * segments.length)];
   const fullRotations = 5 * 360;
   const totalRotation = fullRotations + (360 - result.angle);
 
   currentRotation += totalRotation;
-
   roulette.style.transition = 'transform 3s ease-out';
   roulette.style.transform = `rotate(${currentRotation}deg)`;
 
   setTimeout(() => {
-    // 結果の反映
     document.body.style.backgroundColor = result.bg;
     message.textContent = result.message;
 
