@@ -1,20 +1,29 @@
+/* 全体設定 */
 body {
   font-family: sans-serif;
   text-align: center;
-  background-color: #fff0cc; /* 初期背景色（薄いピンク系） */
+  background-color: #fffaf5;
   transition: background-color 1s ease;
+  margin: 0;
+  padding: 0;
 }
 
+/* コンテナ中央配置 */
 .container {
-  margin-top: 40px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* タイトル */
 h1 {
   font-size: 2em;
   color: #333;
   margin-bottom: 20px;
 }
 
+/* ルーレットボックス */
 .roulette-box {
   position: relative;
   width: 300px;
@@ -22,42 +31,49 @@ h1 {
   margin: 0 auto;
 }
 
+/* ルーレット画像 */
 #roulette {
   width: 100%;
   height: auto;
   transition: transform 3s ease-out;
   transform-origin: center center;
-  display: block;
 }
 
+/* ポインター（ルーレットの外側上に配置） */
 #pointer {
   position: absolute;
-  top: -30px; /* 外側に配置 */
+  top: -30px;
   left: 50%;
-  transform: translateX(-50%);
   width: 50px;
+  height: 50px;
+  transform: translateX(-50%);
   z-index: 2;
 }
 
+/* スタートボタン */
 button {
-  margin-top: 20px;
   padding: 10px 20px;
   font-size: 1em;
   background-color: #ffcc00;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
+/* 結果テキスト */
 #resultText {
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 1.1em;
-  font-weight: bold;
+  color: #333;
 }
 
+/* 動画（中央配置＆レスポンシブ） */
 video {
-  margin-top: 20px;
+  display: block;
+  margin: 20px auto;
   width: 90%;
   max-width: 360px;
   border-radius: 10px;
+  transition: opacity 0.5s ease;
 }
