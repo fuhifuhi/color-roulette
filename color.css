@@ -1,104 +1,63 @@
-/* 全体背景と文字設定 */
 body {
   font-family: sans-serif;
   text-align: center;
-  background-color: #fff0f5; /* 初期背景はピンク系 */
-  transition: background-color 0.5s ease; /* 背景色をアニメーションで変化 */
-  margin: 0;
-  padding: 0;
+  background-color: #fff0cc; /* 初期背景色（薄いピンク系） */
+  transition: background-color 1s ease;
 }
 
-/* 中央寄せコンテナ */
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
+  margin-top: 40px;
 }
 
-/* タイトル */
 h1 {
   font-size: 2em;
   color: #333;
   margin-bottom: 20px;
 }
 
-/* ルーレットとポインターのボックス */
 .roulette-box {
   position: relative;
   width: 300px;
   height: 300px;
-  margin-bottom: 20px;
+  margin: 0 auto;
 }
 
-/* ルーレット画像 */
 #roulette {
   width: 100%;
   height: auto;
   transition: transform 3s ease-out;
   transform-origin: center center;
+  display: block;
 }
 
-/* ポインター画像（ルーレットの上部に固定） */
 #pointer {
   position: absolute;
-  bottom: 100%;
+  top: -30px; /* 外側に配置 */
   left: 50%;
-  transform: translateX(-50%) translateY(-10px); /* 少し上に浮かせる */
-  width: 40px;
-  height: 40px;
+  transform: translateX(-50%);
+  width: 50px;
   z-index: 2;
 }
 
-/* スタートボタン */
 button {
+  margin-top: 20px;
   padding: 10px 20px;
   font-size: 1em;
   background-color: #ffcc00;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 15px;
 }
 
-/* 動画プレーヤー */
-video {
-  width: 100%;
-  max-width: 360px;
-  height: auto;
+#resultText {
   margin-top: 20px;
-  border: 1px solid #ccc;
-  display: block;
-}
-
-/* ラッキーカラーのテキスト表示 */
-#resultMessage {
   font-size: 1.1em;
   font-weight: bold;
-  margin-top: 10px;
-  color: #333;
 }
 
-/* モバイル対応のレスポンシブ */
-@media screen and (max-width: 480px) {
-  .roulette-box {
-    width: 240px;
-    height: 240px;
-  }
-
-  #pointer {
-    width: 30px;
-    height: 30px;
-  }
-
-  button {
-    font-size: 0.9em;
-    padding: 8px 16px;
-  }
-
-  video {
-    max-width: 90vw;
-  }
+video {
+  margin-top: 20px;
+  width: 90%;
+  max-width: 360px;
+  border-radius: 10px;
 }

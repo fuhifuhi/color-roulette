@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>カラールーレット</title>
-  <link rel="stylesheet" href="color.css">
+  <link rel="stylesheet" href="color.css" />
 </head>
 <body>
   <div class="container">
     <h1>カラールーレット</h1>
     <div class="roulette-box">
-      <img id="roulette" src="roulette.png" alt="ルーレット">
-      <img id="pointer" src="pointer.png" alt="ポインター">
+      <img id="pointer" src="pointer.png" alt="ポインター" />
+      <img id="roulette" src="roulette.png" alt="ルーレット" />
     </div>
-    <br>
     <button id="startBtn">スタート！</button>
-    <p id="resultMessage"></p>
-    <video id="colorVideo" controls style="display:none;"></video>
+    <p id="resultText"></p>
+    <video id="colorVideo" width="300" controls style="display: none;"></video>
   </div>
   <script src="color.js"></script>
 </body>
