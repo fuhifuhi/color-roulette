@@ -1,84 +1,26 @@
-/* ベーススタイル */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Kosugi Maru', sans-serif;
-  background-color: #fffaf5;
+  font-family: sans-serif;
   text-align: center;
+  background-color: #f9f9f9;
 }
 
 .container {
-  max-width: 480px;
-  margin: 0 auto;
   padding: 20px;
 }
 
-/* ルーレットとポインター配置 */
-.roulette-wrapper {
+.roulette-box {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  display: inline-block;
 }
 
 #roulette {
-  width: 100%;
-  animation: none;
-  transform: rotate(0deg);
-  transition: transform 3s ease-out;
+  width: 300px;
 }
 
 #pointer {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 50px;
   transform: translateX(-50%);
-  z-index: 2;
-}
-
-/* ボタンエリア */
-.buttons {
-  margin: 20px 0;
-}
-
-button {
-  font-size: 18px;
-  padding: 10px 30px;
-  margin: 0 10px;
-  border: none;
-  border-radius: 8px;
-  background-color: #ff6b81;
-  color: white;
-  cursor: pointer;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
-  transition: background-color 0.3s ease;
-}
-
-button:hover:not(:disabled) {
-  background-color: #ff506a;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* 結果エリア */
-#result {
-  margin-top: 20px;
-  display: none;
-}
-
-#result-video {
-  width: 100%;
-  max-width: 360px;
-  margin-bottom: 10px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-#result-text {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
+  width: 50px;
 }
