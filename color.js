@@ -1,49 +1,37 @@
+let currentRotation = 0; // 直前の角度を保持
+
 document.getElementById('startBtn').addEventListener('click', function () {
   const colors = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'black', 'white'];
-  const backgroundColors = {
-    red: '#ff9999',
-    blue: '#99ccff',
-    green: '#99ff99',
-    yellow: '#ffffcc',
-    pink: '#ffccff',
-    purple: '#cc99ff',
-    orange: '#ffcc66',
-    black: '#333333',
-    white: '#ffffff'
-  };
-
   const roulette = document.getElementById('roulette');
-  const pointer = document.getElementById('pointer');
   const video = document.getElementById('colorVideo');
   const resultText = document.getElementById('resultText');
 
-  // 動画停止＆非表示、ルーレット再表示
+  // 動画非表示
   video.pause();
   video.style.display = 'none';
   video.src = '';
-  roulette.style.display = 'block';
-  pointer.style.display = 'block';
 
-  // 回転角を決定
-  const totalRotation = 360 * 5 + Math.floor(Math.random() * 360);
+  // 回転角度の計算（ランダムで5〜8回転＋ランダム角度）
+  const extraSpins = Math.floor(Math.random() * 3) + 5; // 5〜7回転
+  const finalAngle = Math.floor(Math.random() * 360);
+  const randomAngle = extraSpins * 360 + finalAngle;
+
+  currentRotation += randomAngle; // 累積角度で回転（スムーズ）
+
   roulette.style.transition = 'transform 3s ease-out';
-  roulette.style.transform = `rotate(${totalRotation}deg)`;
+  roulette.style.transform = `rotate(${currentRotation}deg)`;
 
-  // 回転終了後の処理
+  // 色のインデックス取得
+  const index = Math.floor(((currentRotation % 360) / 360) * colors.length);
+  const selectedColor = colors[index];
+
+  // ルーレット停止後の処理
   setTimeout(() => {
-    const finalAngle = (360 - (totalRotation % 360)) % 360;
-    const index = Math.floor(finalAngle / (360 / colors.length));
-    const selectedColor = colors[index];
-
-    // テキスト表示
+    document.body.style.backgroundColor = selectedColor; // 背景色変更
     resultText.textContent = `今日のラッキーカラーは ${selectedColor}！`;
-
-    // 背景色変更
-    document.body.style.backgroundColor = backgroundColors[selectedColor];
 
     // ルーレット非表示、動画表示
     roulette.style.display = 'none';
-    pointer.style.display = 'none';
     video.src = `${selectedColor}.mov`;
     video.style.display = 'block';
     video.play();
