@@ -2,10 +2,13 @@ body {
   font-family: sans-serif;
   text-align: center;
   background-color: #fffaf5;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  margin-top: 50px;
+  margin-top: 30px;
+  padding: 0 10px;
 }
 
 h1 {
@@ -15,8 +18,8 @@ h1 {
 
 .roulette-box {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 80%;
+  max-width: 300px;
   margin: 0 auto;
 }
 
@@ -29,11 +32,10 @@ h1 {
 
 #pointer {
   position: absolute;
-  top: 50%;
+  top: 10%;
   left: 50%;
-  width: 60px;
-  height: 60px;
-  transform: translate(-50%, -170%);
+  width: 20%;
+  transform: translate(-50%, 0);
   z-index: 2;
 }
 
@@ -48,7 +50,15 @@ button {
 
 video {
   margin-top: 20px;
-  max-width: 90%;
+  width: 90%;
+  max-width: 360px;
   height: auto;
   border: 1px solid #ccc;
+}
+
+#resultMessage {
+  font-size: 1.2em;
+  color: #444;
+  margin-top: 20px;
+  display: none;
 }

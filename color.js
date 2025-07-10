@@ -5,31 +5,28 @@ document.getElementById('startBtn').addEventListener('click', function () {
 
   const roulette = document.getElementById('roulette');
   const video = document.getElementById('colorVideo');
-  const result = document.getElementById('result');
+  const resultMessage = document.getElementById('resultMessage');
 
-  // 初期化
   video.pause();
   video.style.display = 'none';
   video.src = '';
-  result.textContent = '';
+  resultMessage.style.display = 'none';
 
-  // ランダム回転
   const extraRotation = Math.floor(Math.random() * 360);
   const totalRotation = 360 * 5 + extraRotation;
 
   roulette.style.transition = 'transform 3s ease-out';
   roulette.style.transform = `rotate(${totalRotation}deg)`;
 
-  // 色の特定
   const finalAngle = (360 - (totalRotation % 360)) % 360;
   const index = Math.floor(finalAngle / anglePerSegment);
   const selectedColor = colors[index];
 
-  // 3秒後に動画再生＆結果表示
   setTimeout(() => {
-    result.textContent = `選ばれた色は「${selectedColor}」です！`;
     video.src = `${selectedColor}.mov`;
     video.style.display = 'block';
     video.play();
+    resultMessage.textContent = `今日のラッキーカラーは ${selectedColor}！`;
+    resultMessage.style.display = 'block';
   }, 3000);
 });
