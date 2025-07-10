@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>カラールーレット</title>
-  <link rel="stylesheet" href="color.css" />
+  <link rel="stylesheet" href="color.css">
 </head>
 <body>
-  <div class="container">
-    <div class="roulette-wrapper">
-      <img src="pointer.png" alt="ポインター" class="pointer" />
-      <img src="roulette.png" alt="ルーレット" class="roulette" id="roulette" />
-      <video id="resultVideo" class="result-video" playsinline></video>
+  <div id="app">
+    <h1 id="title">ラッキーカラールーレット</h1>
+    <div id="roulette-container">
+      <img id="roulette" src="roulette.png" alt="ルーレット">
+      <img id="pointer" src="pointer.png" alt="ポインター">
     </div>
-    <button id="spinButton">ルーレットスタート</button>
-    <div id="message" class="message"></div>
+    <button id="start-button">スタート</button>
+    <p id="message"></p>
+    <video id="color-video" playsinline muted></video>
   </div>
   <script src="color.js"></script>
 </body>

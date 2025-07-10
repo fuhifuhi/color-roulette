@@ -1,56 +1,60 @@
-const roulette = document.getElementById("roulette");
-const resultVideo = document.getElementById("resultVideo");
-const spinButton = document.getElementById("spinButton");
-const message = document.getElementById("message");
+const roulette = document.getElementById('roulette');
+const pointer = document.getElementById('pointer');
+const startButton = document.getElementById('start-button');
+const message = document.getElementById('message');
+const video = document.getElementById('color-video');
 
 const segments = [
-  { color: "red", degree: 0, bg: "#ff4d4d", msg: "今日のラッキーカラーは赤！", video: "red.mov" },
-  { color: "blue", degree: 36, bg: "#4d79ff", msg: "今日のラッキーカラーは青！", video: "blue.mov" },
-  { color: "green", degree: 72, bg: "#33cc33", msg: "今日のラッキーカラーは緑！", video: "green.mov" },
-  { color: "yellow", degree: 108, bg: "#ffff66", msg: "今日のラッキーカラーは黄色！", video: "yellow.mov" },
-  { color: "purple", degree: 144, bg: "#cc66ff", msg: "今日のラッキーカラーは紫！", video: "purple.mov" },
-  { color: "orange", degree: 180, bg: "#ff9933", msg: "今日のラッキーカラーはオレンジ！", video: "orange.mov" },
-  { color: "pink", degree: 216, bg: "#ff99cc", msg: "今日のラッキーカラーはピンク！", video: "pink.mov" },
-  { color: "gray", degree: 252, bg: "#cccccc", msg: "今日のラッキーカラーはグレー！", video: "gray.mov" },
-  { color: "black", degree: 288, bg: "#333333", msg: "今日のラッキーカラーは黒！", video: "black.mov" },
-  { color: "question", degree: 324, bg: "#ffffff", msg: "今日は何が起こるかお楽しみに！", video: "question.mov" }
+  { color: 'red', angle: 0, bg: '#ff4d4d', video: 'red.mov', message: '今日のラッキーカラーは赤！' },
+  { color: 'orange', angle: 36, bg: '#ffa500', video: 'orange.mov', message: '今日のラッキーカラーはオレンジ！' },
+  { color: 'yellow', angle: 72, bg: '#ffff66', video: 'yellow.mov', message: '今日のラッキーカラーは黄色！' },
+  { color: 'green', angle: 108, bg: '#66ff66', video: 'green.mov', message: '今日のラッキーカラーは緑！' },
+  { color: 'blue', angle: 144, bg: '#66b3ff', video: 'blue.mov', message: '今日のラッキーカラーは青！' },
+  { color: 'purple', angle: 180, bg: '#cc66ff', video: 'purple.mov', message: '今日のラッキーカラーは紫！' },
+  { color: 'pink', angle: 216, bg: '#ff99cc', video: 'pink.mov', message: '今日のラッキーカラーはピンク！' },
+  { color: 'brown', angle: 252, bg: '#cc9966', video: 'brown.mov', message: '今日のラッキーカラーは茶色！' },
+  { color: 'black', angle: 288, bg: '#333333', video: 'black.mov', message: '今日のラッキーカラーは黒！' },
+  { color: '?', angle: 324, bg: '#ffffff', video: 'question.mov', message: '今日は何が起こるかお楽しみに！' }
 ];
 
-let isSpinning = false;
+let spinning = false;
+let currentRotation = 0;
 
-spinButton.addEventListener("click", () => {
-  if (isSpinning) return;
-  isSpinning = true;
+startButton.addEventListener('click', () => {
+  if (spinning) return;
+  spinning = true;
 
-  // リセット
-  roulette.style.display = "block";
-  resultVideo.style.display = "none";
-  resultVideo.pause();
-  resultVideo.src = "";
-  message.textContent = "";
-  document.body.style.backgroundColor = "#ffffff";
+  // 初期化
+  roulette.style.display = 'block';
+  video.pause();
+  video.currentTime = 0;
+  video.style.display = 'none';
+  pointer.style.display = 'block';
+  message.textContent = '';
+  document.body.style.backgroundColor = '#f0f0f0';
 
-  // 回転角を計算
-  const spinIndex = Math.floor(Math.random() * segments.length);
-  const baseDegree = 360 * 5; // 5回転
-  const finalDegree = baseDegree + (360 - segments[spinIndex].degree);
+  // ランダムにセグメントを選ぶ
+  const result = segments[Math.floor(Math.random() * segments.length)];
+  const fullRotations = 5 * 360;
+  const totalRotation = fullRotations + (360 - result.angle);
 
-  roulette.style.transform = `rotate(${finalDegree}deg)`;
+  currentRotation += totalRotation;
 
-  // 回転後の処理（アニメーション終了後）
+  roulette.style.transition = 'transform 3s ease-out';
+  roulette.style.transform = `rotate(${currentRotation}deg)`;
+
   setTimeout(() => {
-    // 背景色変更
-    document.body.style.backgroundColor = segments[spinIndex].bg;
+    // 結果の反映
+    document.body.style.backgroundColor = result.bg;
+    message.textContent = result.message;
 
-    // メッセージ表示
-    message.textContent = segments[spinIndex].msg;
+    roulette.style.display = 'none';
+    pointer.style.display = 'none';
 
-    // 動画表示
-    roulette.style.display = "none";
-    resultVideo.src = segments[spinIndex].video;
-    resultVideo.style.display = "block";
-    resultVideo.play();
+    video.src = result.video;
+    video.style.display = 'block';
+    video.play();
 
-    isSpinning = false;
-  }, 4000);
+    spinning = false;
+  }, 3000);
 });

@@ -1,63 +1,65 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: #f0f0f0;
   font-family: sans-serif;
   text-align: center;
-  background-color: #ffffff;
-  transition: background-color 1s ease;
 }
 
-.container {
+#app {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.roulette-wrapper {
+#title {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#roulette-container {
   position: relative;
-  width: 80vmin;
-  height: 80vmin;
-  max-width: 500px;
-  max-height: 500px;
+  width: 80vw;
+  max-width: 400px;
 }
 
-.roulette {
+#roulette {
   width: 100%;
-  height: auto;
-  transition: transform 4s ease-out;
-  display: block;
+  transition: transform 3s ease-out;
 }
 
-.pointer {
+#pointer {
   position: absolute;
   top: -20px;
   left: 50%;
   transform: translateX(-50%);
   width: 40px;
+  height: auto;
   z-index: 10;
 }
 
-.result-video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: none;
-  z-index: 5;
-}
-
-#spinButton {
+#start-button {
   margin-top: 20px;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 1.2em;
   cursor: pointer;
 }
 
-.message {
+#message {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 1.2em;
   font-weight: bold;
+}
+
+#color-video {
+  display: none;
+  width: 80vw;
+  max-width: 400px;
+  height: auto;
+  margin-top: 20px;
 }
