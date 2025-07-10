@@ -1,44 +1,51 @@
 body {
   font-family: sans-serif;
-  text-align: center;
   background-color: #fffaf5;
   margin: 0;
   padding: 0;
 }
 
 .container {
-  margin-top: 30px;
-  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
+  text-align: center;
 }
 
 h1 {
   font-size: 2em;
-  color: #333;
+  margin-bottom: 20px;
 }
 
 .roulette-box {
   position: relative;
-  width: 80%;
-  max-width: 300px;
+  width: 80vw;
+  max-width: 320px;
+  aspect-ratio: 1 / 1;
   margin: 0 auto;
 }
 
 #roulette {
   width: 100%;
   height: auto;
-  transform-origin: 50% 50%;
+  transition: transform 3s ease-out;
+  transform-origin: center center;
 }
 
 #pointer {
   position: absolute;
-  top: 4%;
+  top: 10%;
   left: 50%;
-  width: 20%;
-  transform: translate(-50%, 0);
+  width: 15%;
+  transform: translateX(-50%);
   z-index: 2;
 }
 
 button {
+  margin-top: 20px;
   padding: 10px 20px;
   font-size: 1em;
   background-color: #ffcc00;
@@ -47,17 +54,17 @@ button {
   cursor: pointer;
 }
 
-video {
+#colorVideo {
   margin-top: 20px;
-  width: 90%;
-  max-width: 360px;
+  width: 90vw;
+  max-width: 320px;
   height: auto;
-  border: 1px solid #ccc;
+  display: none;
 }
 
 #resultMessage {
-  font-size: 1.2em;
+  margin-top: 10px;
+  font-weight: bold;
   color: #444;
-  margin-top: 20px;
-  display: none;
+  font-size: 1em;
 }
