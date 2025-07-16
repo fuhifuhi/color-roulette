@@ -30,24 +30,37 @@ startButton.addEventListener('click', () => {
   video.src = '';
   video.style.display = 'none';
 
+  roulette.style.display = 'block';
+  roulette.style.transform = 'rotate(0deg)';
+  roulette.style.transition = 'none';
+
   const total = colors.length;
   const selected = Math.floor(Math.random() * total);
   const degPerSlice = 360 / total;
   const offset = degPerSlice / 2;
   const rotation = 360 * 5 + (360 - selected * degPerSlice - offset);
 
-  roulette.style.transition = 'transform 5s ease-out';
-  roulette.style.transform = `rotate(${rotation}deg)`;
+  setTimeout(() => {
+    roulette.style.transition = 'transform 5s ease-out';
+    roulette.style.transform = `rotate(${rotation}deg)`;
+  }, 50);
 
   setTimeout(() => {
     const result = colors[selected];
+
+    // ルーレットを非表示
+    roulette.style.display = 'none';
+
     document.body.style.backgroundColor = result.color;
     message.textContent = result.message;
+
     video.src = result.video;
     video.style.display = 'block';
     video.play();
 
     video.onended = () => {
+      video.style.display = 'none';
+      roulette.style.display = 'block';
       pointer.style.display = 'block';
       startButton.style.display = 'inline-block';
       spinning = false;

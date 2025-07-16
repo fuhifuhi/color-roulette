@@ -9,14 +9,18 @@
 <body>
   <div class="container">
     <h1 id="title">ラッキーカラールーレット</h1>
-    <div class="roulette-wrapper">
+
+    <div class="roulette-wrapper" id="rouletteWrapper">
       <img src="roulette.png" id="roulette" alt="ルーレット" />
       <img src="pointer.png" id="pointer" class="pointer" alt="ポインター" />
-      <video id="colorVideo" playsinline muted></video>
     </div>
+
+    <video id="colorVideo" playsinline muted></video>
+
     <button id="startButton">スタート</button>
     <div id="message"></div>
   </div>
+
   <script src="color.js"></script>
 </body>
 </html>
