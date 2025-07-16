@@ -26,18 +26,18 @@ startButton.addEventListener('click', () => {
   startButton.style.display = 'none';
   pointer.style.display = 'none';
   message.textContent = '';
-  video.style.display = 'none';
   video.pause();
   video.src = '';
+  video.style.display = 'none';
 
-  const totalSlices = colors.length;
-  const selected = Math.floor(Math.random() * totalSlices);
-  const degreesPerSlice = 360 / totalSlices;
-  const offset = degreesPerSlice / 2;
-  const endDeg = 360 * 5 + (360 - selected * degreesPerSlice - offset);
+  const total = colors.length;
+  const selected = Math.floor(Math.random() * total);
+  const degPerSlice = 360 / total;
+  const offset = degPerSlice / 2;
+  const rotation = 360 * 5 + (360 - selected * degPerSlice - offset);
 
   roulette.style.transition = 'transform 5s ease-out';
-  roulette.style.transform = `rotate(${endDeg}deg)`;
+  roulette.style.transform = `rotate(${rotation}deg)`;
 
   setTimeout(() => {
     const result = colors[selected];
@@ -48,8 +48,8 @@ startButton.addEventListener('click', () => {
     video.play();
 
     video.onended = () => {
-      startButton.style.display = 'inline-block';
       pointer.style.display = 'block';
+      startButton.style.display = 'inline-block';
       spinning = false;
     };
   }, 5200);
