@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const roulette = document.getElementById("roulette");
+  const rouletteContainer = document.getElementById("roulette-container");
   const startButton = document.getElementById("start-button");
   const video = document.getElementById("result-video");
   const message = document.getElementById("result-message");
@@ -18,18 +19,27 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   let spinning = false;
+  let currentState = "roulette"; // 状態管理：roulette or video
 
   startButton.addEventListener("click", () => {
+    if (currentState === "video") {
+      // MOV終了後 → 再スタートでルーレット復帰
+      rouletteContainer.style.display = "block";
+      message.textContent = "";
+      document.body.style.backgroundColor = "#ffffff";
+      currentState = "roulette";
+      return;
+    }
+
     if (spinning) return;
     spinning = true;
-
-    video.pause();
-    video.currentTime = 0;
+    startButton.disabled = true;
     video.style.display = "none";
-    message.textContent = "";
 
     const selectedIndex = Math.floor(Math.random() * 10);
-    const rotation = 360 * 10 + selectedIndex * 36 + Math.floor(Math.random() * 10 - 5);
+    const rotation =
+      360 * 10 + selectedIndex * 36 + Math.floor(Math.random() * 10 - 5);
+
     roulette.style.transition = "transform 5s ease-out";
     roulette.style.transform = `rotate(${rotation}deg)`;
 
@@ -37,13 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = sectors[selectedIndex];
       document.body.style.backgroundColor = result.bg;
 
+      // 非表示切替
+      rouletteContainer.style.display = "none";
       video.src = result.file;
       video.style.display = "block";
       video.play();
-
       message.textContent = result.msg;
 
+      currentState = "video";
       spinning = false;
     }, 5000);
+  });
+
+  video.addEventListener("ended", () => {
+    video.style.display = "none";
+    startButton.disabled = false;
+    // ルーレットは再スタート時に復活
   });
 });
