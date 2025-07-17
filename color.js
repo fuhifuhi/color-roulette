@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const pointer = document.getElementById('pointer');
   const video = document.getElementById('colorVideo');
   const message = document.getElementById('resultMessage');
-  const wrapper = document.querySelector('.roulette-wrapper');
   let isSpinning = false;
 
   const segments = [
@@ -31,12 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
     video.style.display = 'none';
     message.textContent = '';
     pointer.style.display = 'block';
-    startButton.style.display = 'block';
     document.body.style.overflow = 'hidden';
     document.body.style.backgroundColor = '#f0f0f0';
     roulette.style.display = 'block';
 
-    // ランダム停止位置決定
+    // 回転ロジック
     const selectedIndex = Math.floor(Math.random() * totalSegments);
     const extraRotation = 360 * 5;
     const rotateTo = extraRotation + (360 - selectedIndex * degPerSegment - degPerSegment / 2);
@@ -45,14 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
     roulette.style.transform = `rotate(${rotateTo}deg)`;
 
     setTimeout(() => {
-      // 回転終了後処理
       const result = segments[selectedIndex];
       roulette.style.display = 'none';
       video.src = `./${result.color}.mov`;
       video.style.display = 'block';
       document.body.style.backgroundColor = result.bg;
       pointer.style.display = 'none';
-      startButton.style.display = 'none';
       message.textContent = result.msg;
 
       video.play();
@@ -60,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
       video.onended = () => {
         video.style.display = 'none';
         pointer.style.display = 'block';
-        startButton.style.display = 'block';
         document.body.style.overflow = 'auto';
         isSpinning = false;
       };
