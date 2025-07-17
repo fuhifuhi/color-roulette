@@ -1,64 +1,49 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const startButton = document.getElementById('startButton');
-  const roulette = document.getElementById('roulette');
-  const pointer = document.getElementById('pointer');
-  const video = document.getElementById('colorVideo');
-  const message = document.getElementById('resultMessage');
-  let isSpinning = false;
+document.addEventListener("DOMContentLoaded", () => {
+  const roulette = document.getElementById("roulette");
+  const startButton = document.getElementById("start-button");
+  const video = document.getElementById("result-video");
+  const message = document.getElementById("result-message");
 
-  const segments = [
-    { color: 'red', bg: '#ff4d4d', msg: '今日のあなたは情熱的！' },
-    { color: 'blue', bg: '#4d79ff', msg: '冷静な判断が吉' },
-    { color: 'green', bg: '#33cc33', msg: '自然体が幸運を呼ぶ' },
-    { color: 'yellow', bg: '#ffff66', msg: 'ひらめきが鍵になる' },
-    { color: 'purple', bg: '#b266ff', msg: '感性が冴え渡る一日' },
-    { color: 'orange', bg: '#ff9933', msg: '元気ハツラツに行動しよう！' },
-    { color: 'pink', bg: '#ff99cc', msg: '優しさが運を呼び込む' },
-    { color: 'brown', bg: '#a0522d', msg: '堅実な行動が吉' },
-    { color: 'black', bg: '#333333', msg: 'クールに決めて運気上昇' },
-    { color: 'question', bg: '#ffffff', msg: '何が起きるか、全ては運次第…！' }
+  const sectors = [
+    { color: "赤", file: "red.mov", bg: "#ff4b4b", msg: "情熱の赤！" },
+    { color: "青", file: "blue.mov", bg: "#4b6cff", msg: "冷静な青！" },
+    { color: "黄", file: "yellow.mov", bg: "#fff04b", msg: "輝きの黄！" },
+    { color: "緑", file: "green.mov", bg: "#4bff76", msg: "癒しの緑！" },
+    { color: "紫", file: "purple.mov", bg: "#a04bff", msg: "神秘の紫！" },
+    { color: "ピンク", file: "pink.mov", bg: "#ff4bb2", msg: "愛のピンク！" },
+    { color: "オレンジ", file: "orange.mov", bg: "#ffa64b", msg: "元気なオレンジ！" },
+    { color: "水色", file: "skyblue.mov", bg: "#4bdfff", msg: "爽やか水色！" },
+    { color: "白", file: "white.mov", bg: "#ffffff", msg: "純白の白！" },
+    { color: "？", file: "question.mov", bg: "#000000", msg: "謎のラッキーカラー！？" }
   ];
 
-  const totalSegments = segments.length;
-  const degPerSegment = 360 / totalSegments;
+  let spinning = false;
 
-  startButton.addEventListener('click', () => {
-    if (isSpinning) return;
-    isSpinning = true;
+  startButton.addEventListener("click", () => {
+    if (spinning) return;
+    spinning = true;
 
-    // 初期化
-    video.style.display = 'none';
-    message.textContent = '';
-    pointer.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    document.body.style.backgroundColor = '#f0f0f0';
-    roulette.style.display = 'block';
+    video.pause();
+    video.currentTime = 0;
+    video.style.display = "none";
+    message.textContent = "";
 
-    // 回転ロジック
-    const selectedIndex = Math.floor(Math.random() * totalSegments);
-    const extraRotation = 360 * 5;
-    const rotateTo = extraRotation + (360 - selectedIndex * degPerSegment - degPerSegment / 2);
-
-    roulette.style.transition = 'transform 5s ease-out';
-    roulette.style.transform = `rotate(${rotateTo}deg)`;
+    const selectedIndex = Math.floor(Math.random() * 10);
+    const rotation = 360 * 10 + selectedIndex * 36 + Math.floor(Math.random() * 10 - 5);
+    roulette.style.transition = "transform 5s ease-out";
+    roulette.style.transform = `rotate(${rotation}deg)`;
 
     setTimeout(() => {
-      const result = segments[selectedIndex];
-      roulette.style.display = 'none';
-      video.src = `./${result.color}.mov`;
-      video.style.display = 'block';
+      const result = sectors[selectedIndex];
       document.body.style.backgroundColor = result.bg;
-      pointer.style.display = 'none';
-      message.textContent = result.msg;
 
+      video.src = result.file;
+      video.style.display = "block";
       video.play();
 
-      video.onended = () => {
-        video.style.display = 'none';
-        pointer.style.display = 'block';
-        document.body.style.overflow = 'auto';
-        isSpinning = false;
-      };
+      message.textContent = result.msg;
+
+      spinning = false;
     }, 5000);
   });
 });

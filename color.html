@@ -7,16 +7,21 @@
   <link rel="stylesheet" href="color.css" />
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">ラッキーカラールーレット</h1>
-    <div class="roulette-wrapper">
-      <img src="./roulette.png" alt="ルーレット" id="roulette" />
-      <img src="./pointer.png" alt="ポインター" id="pointer" />
-      <video id="colorVideo" muted autoplay playsinline></video>
-    </div>
-    <button id="startButton">スタート</button>
-    <div id="resultMessage"></div>
+  <h1 id="title">ラッキーカラールーレット</h1>
+
+  <div id="roulette-container">
+    <img id="roulette" src="roulette.png" alt="ルーレット" />
+    <img id="pointer" src="pointer.png" alt="ポインター" />
   </div>
+
+  <button id="start-button">スタート</button>
+
+  <div id="video-container">
+    <video id="result-video" playsinline muted></video>
+  </div>
+
+  <div id="result-message"></div>
+
   <script src="color.js"></script>
 </body>
 </html>

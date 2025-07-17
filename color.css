@@ -1,75 +1,60 @@
-* {
-  box-sizing: border-box;
+body {
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  background-color: #ffffff;
   margin: 0;
   padding: 0;
 }
 
-body {
-  background-color: #f0f0f0;
-  font-family: sans-serif;
-  text-align: center;
-  height: 100vh;
-  overflow: hidden;
+#title {
+  margin: 20px 0;
+  font-size: 1.8em;
+  font-weight: bold;
 }
 
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.title {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-}
-
-.roulette-wrapper {
+#roulette-container {
   position: relative;
-  width: 90vw;
-  max-width: 320px;
-  aspect-ratio: 1 / 1;
-  margin-bottom: 20px;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 #roulette {
   width: 100%;
   height: 100%;
-  object-fit: contain;
   transition: transform 5s ease-out;
 }
 
 #pointer {
   position: absolute;
-  top: 0;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
   width: 40px;
-  z-index: 3;
+  z-index: 10;
   pointer-events: none;
 }
 
-#colorVideo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 2;
-  display: none;
-}
-
-#startButton {
-  z-index: 1;
-  font-size: 1rem;
+#start-button {
+  margin: 20px auto;
   padding: 10px 20px;
+  font-size: 1.2em;
   cursor: pointer;
 }
 
-#resultMessage {
+#video-container {
   margin-top: 20px;
-  font-size: 1.2rem;
+}
+
+#result-video {
+  width: 90%;
+  max-width: 480px;
+  height: auto;
+  display: none;
+}
+
+#result-message {
+  margin-top: 15px;
+  font-size: 1.4em;
   font-weight: bold;
 }
