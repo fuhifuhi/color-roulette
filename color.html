@@ -8,17 +8,14 @@
 </head>
 <body>
   <div class="container">
-    <h1 id="title">ラッキーカラールーレット</h1>
-
-    <div class="roulette-wrapper" id="rouletteWrapper">
-      <img src="roulette.png" id="roulette" alt="ルーレット" />
-      <img src="pointer.png" id="pointer" class="pointer" alt="ポインター" />
+    <h1 class="title">ラッキーカラールーレット</h1>
+    <div class="roulette-wrapper">
+      <img src="./roulette.png" alt="ルーレット" id="roulette" />
+      <img src="./pointer.png" alt="ポインター" id="pointer" />
+      <video id="colorVideo" muted autoplay playsinline></video>
     </div>
-
-    <video id="colorVideo" playsinline muted></video>
-
     <button id="startButton">スタート</button>
-    <div id="message"></div>
+    <div id="resultMessage"></div>
   </div>
 
   <script src="color.js"></script>
